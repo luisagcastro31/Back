@@ -6,17 +6,17 @@ const main = async () => {
     await conectarBD();
 
 // CREAR UN USUARIO    
-/* await UserModel.create({
+await UserModel.create({
     apellido: "Peréz",
-    correo: "pj@skje.com",
-    identificacion: "52634r",
-    nombre: "Carlos",
-    rol: Enum_Rol.lider,
+    correo: "andres27@correo.com",
+    identificacion: "875695",
+    nombre: "Andres",
+    rol: Enum_Rol.estudiante,
     }).then((u) => {
         console.log("Usuario creado", u);
     }).catch(e =>{
         console.error("Error", e);
-    }); */
+    });
 
     //OBTENER LOS USUARIOS
 /*  await UserModel.find().then((u)=> {
@@ -26,12 +26,13 @@ const main = async () => {
     }); */
 
     //OBTENER UN SOLO USUARIO
-    await UserModel.findOne({identificacion:"8736r3"})
+/*  await UserModel.findOne({identificacion:"8736r3"})
     .then(u=>{
         console.log("Usuario Encontrado", u);
     }).catch(e=>{
         console.error(e);
-    });
+    }); */
+
     //EDITAR UN USUARIO
 /*  await UserModel.findOneAndUpdate(
         {identificacion:"8736r3"},
