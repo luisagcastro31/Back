@@ -25,6 +25,13 @@ const main = async () => {
         console.error("error", e)
     }); */
 
+    //OBTENER UN SOLO USUARIO
+    await UserModel.findOne({identificacion:"8736r3"})
+    .then(u=>{
+        console.log("Usuario Encontrado", u);
+    }).catch(e=>{
+        console.error(e);
+    });
     //EDITAR UN USUARIO
 /*  await UserModel.findOneAndUpdate(
         {identificacion:"8736r3"},
@@ -36,12 +43,12 @@ const main = async () => {
     }); */
 
     //ELIMINAR UN USUARIO
-    await UserModel.findOneAndDelete({correo: "ola@onlanguagechange.com"})
+/*  await UserModel.findOneAndDelete({correo: "ola@onlanguagechange.com"})
     .then(u=>{
         console.log("Usuario Eliminado", u);
     }).catch(e=>{
         console.error("Eroor Eliminando", e);
-    })
+    }) */
 };
 
 main();
