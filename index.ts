@@ -1,27 +1,29 @@
 import conectarBD from "./db/db";
 import UserModel from "./models/user";
+import {Enum_Rol} from "./models/enums";
 
 const main = async () => {
     await conectarBD();
 
     // CREAR UN USUARIO    
-/*     UserModel.create({
-        correo:"ola@onlanguagechange.com",
-        identificacion: "8736r",
-        nombre: "Luisa",
-        apellido: "Castro",
+await UserModel.create({
+    apellido: "Peréz",
+    correo: "pj@skje.com",
+    identificacion: "52634r",
+    nombre: "Carlos",
+    rol: Enum_Rol.lider,
     }).then((u) => {
         console.log("Usuario creado", u);
     }).catch(e =>{
-        console.error("Error");
-    }); */
+        console.error("Error", e);
+    });
 
     //OBTENER LOS USUARIOS
-    await UserModel.find().then((u)=> {
+/*     await UserModel.find().then((u)=> {
         console.log("usuarios", u);
     }).catch(e => {
         console.error("error", e)
-    });
+    }); */
 };
 
 main();
