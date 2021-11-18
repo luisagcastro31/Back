@@ -26,14 +26,22 @@ const main = async () => {
     }); */
 
     //EDITAR UN USUARIO
-    await UserModel.findOneAndUpdate(
+/*  await UserModel.findOneAndUpdate(
         {identificacion:"8736r3"},
         {correo: "ashu18@nlanguagechange",}
     ).then(u=>{
         console.log("Usuario Actualizado", u);
     }).catch(e=>{
         console.error("Error Actualizando", e)
-    });
+    }); */
+
+    //ELIMINAR UN USUARIO
+    await UserModel.findOneAndDelete({correo: "ola@onlanguagechange.com"})
+    .then(u=>{
+        console.log("Usuario Eliminado", u);
+    }).catch(e=>{
+        console.error("Eroor Eliminando", e);
+    })
 };
 
 main();
