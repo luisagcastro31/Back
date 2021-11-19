@@ -7,10 +7,10 @@ const main = async () => {
 
 // CREAR UN USUARIO    
 await UserModel.create({
-    apellido: "Peréz",
-    correo: "andres27@correo.com",
-    identificacion: "875695",
-    nombre: "Andres",
+    apellido: "Hernández",
+    correo: "papitas02@correo.com",
+    identificacion: "87565",
+    nombre: "Pablo",
     rol: Enum_Rol.estudiante,
     }).then((u) => {
         console.log("Usuario creado", u);
