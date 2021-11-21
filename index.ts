@@ -1,12 +1,23 @@
 import conectarBD from "./db/db";
 import UserModel from "./models/user";
 import {Enum_Rol} from "./models/enums";
+import { ProyectModel } from "./models/proyect";
 
 const main = async () => {
     await conectarBD();
 
+    ProyectModel.create({
+        nombre:"Proyecto 1",
+        presupuesto: 120,
+        fechaInicio: Date.now(),
+        fechaFin: new Date("2022/11/10"),
+    })
+
+};
+main();
+
 // CREAR UN USUARIO    
-await UserModel.create({
+/* await UserModel.create({
     apellido: "Hernández",
     correo: "papitas02@correo.com",
     identificacion: "87565",
@@ -16,7 +27,7 @@ await UserModel.create({
         console.log("Usuario creado", u);
     }).catch(e =>{
         console.error("Error", e);
-    });
+    }); */
 
     //OBTENER LOS USUARIOS
 /*  await UserModel.find().then((u)=> {
@@ -50,6 +61,4 @@ await UserModel.create({
     }).catch(e=>{
         console.error("Eroor Eliminando", e);
     }) */
-};
 
-main();

@@ -17,7 +17,7 @@ const userSchema = new Schema<User>({
         unique: true,
         validate: {
             validator: (email) => {
-              return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email);
+              return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
             },
             message: "El correo electronico ingresado está mal."
         },
