@@ -8,7 +8,7 @@ interface Objective{
     proyecto: Schema.Types.ObjectId;
 }
 
-const objetiveSchema = new Schema<Objective>({
+const objectiveSchema = new Schema<Objective>({
     descripcion:{
         type: String,
         required: true,
@@ -24,6 +24,6 @@ const objetiveSchema = new Schema<Objective>({
     }
 });
 
-const ObjectiveModel = model("Objetivo", objetiveSchema);
+const ObjectiveModel = model("Objetivo", objectiveSchema);
 
 export {ObjectiveModel};

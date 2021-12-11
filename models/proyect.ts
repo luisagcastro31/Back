@@ -11,10 +11,10 @@ interface Proyecto{
     estado: Enum_EstadoProyecto,
     fase: Enum_FaseProyecto,
     lider: Schema.Types.ObjectId,
-    objetivos: [Schema.Types.ObjectId],
+    objetivos: string,
 }
 
-const projectSchema = new Schema<Proyecto>({
+const proyectSchema = new Schema<Proyecto>({
     nombre:{
         type: String,
         required: true,
@@ -35,7 +35,6 @@ const projectSchema = new Schema<Proyecto>({
         type: String,
         enum: Enum_EstadoProyecto,
         default: Enum_EstadoProyecto.inactivo,
-        required: true,
     },
     fase: {
         type: String,
@@ -47,15 +46,21 @@ const projectSchema = new Schema<Proyecto>({
         required: true,
         ref: UserModel,
     },
-    objetivos:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: ObjectiveModel,
+    objetivos: [{
+        descripcion: {
+            type: String,
+            required: true,
         },
-    ],
-});
-
-const ProyectModel = model("Proyecto", projectSchema);
+        tipo: {
+            type: String,
+            enum: ['GENERAL', 'ESPECIFICO'],
+            required: true,
+        },
+    },
+],
+},
+);
+const ProyectModel = model("Proyecto", proyectSchema);
 
 export{ProyectModel};
 

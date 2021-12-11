@@ -1,8 +1,9 @@
 import conectarBD from "./db/db";
 import UserModel from "./models/user";
-import {Enum_EstadoUsuario, Enum_Rol} from "./models/enums";
+import {Enum_EstadoUsuario, Enum_Rol, Enum_TipoObjetivo} from "./models/enums";
 import { ProyectModel } from "./models/proyect";
 import { ObjectId } from "mongoose"; 
+import { ObjectiveModel } from "./models/objective";
 
 const main = async () => {
     await conectarBD();
@@ -16,16 +17,32 @@ const main = async () => {
         estado: Enum_EstadoUsuario.autorizado,
     });
 
-    const proyecto = await ProyectModel.create({
-        nombre: "Proyecto Misión Tic",
-        fechaInicio: new Date("2021/12/24"),
-        fechaFin: new Date("2022/12/24"),
-        presupuesto: 120000,
+    const proyectoCreado = await ProyectModel.create ({
+        nombre: "Proyecto Misión TIC",
+        fechaInicio: new Date ("2021/12/24"),
+        fechaFin: new Date ("2023/05/27"),
+        presupuesto: 200000,
         lider: usuarioInicial._id,
     });
 
-    console.log(proyecto);
+    const objetivoGeneral = await ObjectiveModel.create({
+        descripcion: "Este es el objetivo general",
+        tipo: Enum_TipoObjetivo.general,
+        proyecto: proyectoCreado._id,
+    });
 
+    const objetivoEspecifico1 = await ObjectiveModel.create({
+        descripcion: "Este es el objetivo especifico 1",
+        tipo: Enum_TipoObjetivo.especifico,
+        proyecto: proyectoCreado._id,
+    });
+
+    const objetivoEspecifico2 = await ObjectiveModel.create({
+        descripcion: "Este es el objetivo especifico 2",
+        tipo: Enum_TipoObjetivo.especifico,
+        proyecto: proyectoCreado._id,
+    })
+    console.log(proyectoCreado);
 // CREAR UN PROYECTO
 /*  ProyectModel.create({
         nombre:"Proyecto 2",
