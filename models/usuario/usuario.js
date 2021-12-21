@@ -1,70 +1,82 @@
 import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
+// import { Enum_Rol, Enum_EstadoUsuario } from '../enums/enums';
 
+// interface User {
+//   correo: string;
+//   identificacion: string;
+//   nombre: string;
+//   apellido: string;
+//   rol: Enum_Rol;
+//   estado: Enum_EstadoUsuario;
+// }
 
-const { Schema, model} = mongoose;
-
-//Definir esquema, representación en codigo de lo que se define en los cuadros, definirse si es requerido si es unico y si es numerador
-const userSchema = new Schema ({//el user garantiza que todos tengan el mismo tema que interface
-    correo: {
-        type: String,
-        required: true,
-        unique: true,
-        validate: {
-         validator: (email) => {
-            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);//que cumpla con las condiciones
-         },
-         message: 'El formato del correo electrónico es incorrecto.',
-        },
+const userSchema = new Schema({
+  correo: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (email) => {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+      },
+      // (email) => {
+      //   if (email.includes('@') && email.includes('.')) {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // },
+      message: 'El formato del correo electrónico está malo.',
     },
-    identificacion: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    nombre: {
-        type: String,
-        required: true,
-    },
-    apellido: {
-        type: String,
-        required: true,
-    },
-    rol: {
-        type: String,
-        required: true,
-        enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
-    },
-    estado: {
-        type: String,
-        required: true,
-        enum: ['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
-        default: 'PENDIENTE', 
-    },
-    },
-{ 
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true},
-}
-);
-
-userSchema.virtual('inscripciones',{
-    ref:'Inscripcion', 
-    localField: '_id',
-    foreignField: 'estudiante',
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  identificacion: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  nombre: {
+    type: String,
+    required: true,
+  },
+  apellido: {
+    type: String,
+    required: true,
+  },
+  rol: {
+    type: String,
+    required: true,
+    enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
+  },
+  estado: {
+    type: String,
+    enum: ['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
+    default: 'PENDIENTE',
+  },
 });
 
-userSchema.virtual('proyectosLiderados',{
-    ref:'Proyecto', 
-    localField: '_id',
-    foreignField: 'lider',
+userSchema.virtual('proyectosLiderados', {
+  ref: 'Proyecto',
+  localField: '_id',
+  foreignField: 'lider',
 });
 
-userSchema.virtual('avancesCreados',{
-    ref:'Avance', 
-    localField: '_id',
-    foreignField: 'creadoPor',
+userSchema.virtual('avancesCreados', {
+  ref: 'Avance',
+  localField: '_id',
+  foreignField: 'creadoPor',
 });
 
-const UserModel = model('User', userSchema, "Colección Usuarios");
+userSchema.virtual('inscripciones', {
+  ref: 'Inscripcion',
+  localField: '_id',
+  foreignField: 'estudiante',
+});
 
-export {UserModel};
+const UserModel = model('User', userSchema);
+
+export { UserModel };
