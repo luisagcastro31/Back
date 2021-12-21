@@ -1,9 +1,9 @@
-import {connect} from 'mongoose';
+import mongoose from 'mongoose';
 
 const conectarBD = async ()=>{
-    return await connect(
-        "mongodb+srv://Usar1:12345@bd-paginaweb.mbp91.mongodb.net/BD-PaginaWeb?retryWrites=true&w=majority"
-    ).then(()=>{
+    return await mongoose
+    .connect(process.env.DATABASE_URL)
+    .then(()=>{
         console.log("Conexión Exitosa");
     }).catch((e)=>{
         console.error("Error conectando a la BD", e);
